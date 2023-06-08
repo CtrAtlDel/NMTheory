@@ -45,10 +45,10 @@ def get_matrix_a(matrix):  # Формирование матрицы А
     return matrix_a
 
 
-def get_matrix_a_shtrix(matrix_a):
+def get_matrix_a_shtrix(matrix_a, line_n):
     matrix = matrix_a
     line, column = matrix_a.shape
-    for j in range(0, column - 1):
+    for j in range(0, line_n):
         while check_zeroes(j, j, matrix):
             matrix = change_matrix_upper_left_corner(matrix, j, j)  # Перемещаем в левый угол наименьший элемент шаг 1
             for i in range(j + 1, column):  # Потому что исходный столбец не трогаем, шаг 2
@@ -101,9 +101,7 @@ def concatenate_with_last_column(matrix, column):
 
 
 def get_matrix_result(matrix, line_n):
-    l = []
     matrx_result = matrix
-    line, col = matrix.shape
     for i in range(0, line_n):
         k = matrix[i, -1] // matrix[i, i]
         matrx_result = subtract_columns(matrx_result, -1, i, k)
@@ -117,11 +115,10 @@ def check(matrix, line):
             break
 
 
-def print_column_from_element(matrix, start_line_index, column_index):  # Печать К матрицы
-    column = matrix[start_line_index:, column_index]
-    for element in column:
-        print(element)
-
+def print_last_n_rows(matrix, n):
+    last_n_rows = matrix[-n:, :-1]
+    for row in last_n_rows:
+        print(row)
 
 filename = './data.txt'
 
@@ -131,12 +128,10 @@ if __name__ == '__main__':
     matrix_a = get_matrix_a(matrix)
     line_a, col_a = matrix_a.shape
     last_coll = get_last_column(matrix_a)
-    matrx_a_shtrix = get_matrix_a_shtrix(remove_last_column(matrix_a))
+    matrx_a_shtrix = get_matrix_a_shtrix(remove_last_column(matrix_a), line)  # Берется размер строки исходной матрицы
     new_matrix_with_b = concatenate_with_last_column(matrx_a_shtrix, last_coll)
     matrix_result = get_matrix_result(new_matrix_with_b, line)
-    print(matrx_a_shtrix)
-    print(new_matrix_with_b)
+    l_r, c_r = matrix_result.shape
     print(matrix_result)
     check(matrix_result, line)
-    for i in range(0, col_a):
-        print_column_from_element(matrix_result, i, i)
+    print_last_n_rows(matrix_result, l_r- line)
