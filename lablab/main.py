@@ -109,13 +109,12 @@ def get_matrix_result(matrix, line_n):
         matrx_result = subtract_columns(matrx_result, -1, i, k)
     return matrx_result
 
+
 def check(matrix, line):
-    for i in range(0,line):
-        if matrix[i,-1] != 0:
+    for i in range(0, line):
+        if matrix[i, -1] != 0:
             print("Cannot be solve")
             break
-
-def solution():
 
 
 filename = './data.txt'
