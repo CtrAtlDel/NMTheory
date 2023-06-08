@@ -50,7 +50,7 @@ def get_matrix_a_shtrix(matrix_a):
     line, column = matrix_a.shape
     for j in range(0, column - 1):
         while check_zeroes(j, j, matrix):
-            matrix = change_matrix_upper_left_corner(matrix, j, j)  # Перемещаем в лувый угол наименьший элемент шаг 1
+            matrix = change_matrix_upper_left_corner(matrix, j, j)  # Перемещаем в левый угол наименьший элемент шаг 1
             for i in range(j + 1, column):  # Потому что исходный столбец не трогаем, шаг 2
                 d = matrix[j, i] // matrix[j, j]
                 matrix = subtract_columns(matrix, i, j, d)
