@@ -117,13 +117,19 @@ def check(matrix, line):
             break
 
 
+def print_column_from_element(matrix, start_line_index, column_index):  # Печать К матрицы
+    column = matrix[start_line_index:, column_index]
+    for element in column:
+        print(element)
+
+
 filename = './data.txt'
 
 if __name__ == '__main__':
     matrix, line, column = read_matrix_from_file(filename)
 
     matrix_a = get_matrix_a(matrix)
-
+    line_a, col_a = matrix_a.shape
     last_coll = get_last_column(matrix_a)
     matrx_a_shtrix = get_matrix_a_shtrix(remove_last_column(matrix_a))
     new_matrix_with_b = concatenate_with_last_column(matrx_a_shtrix, last_coll)
@@ -132,3 +138,5 @@ if __name__ == '__main__':
     print(new_matrix_with_b)
     print(matrix_result)
     check(matrix_result, line)
+    for i in range(0, col_a):
+        print_column_from_element(matrix_result, i, i)
